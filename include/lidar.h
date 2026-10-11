@@ -102,6 +102,14 @@ int lidar_read_scan(struct lidar_dev *lidar, struct lidar_scan *scan,
 		    uint32_t timeout_ms);
 
 /*
+ * LDROBOT's near filter for the LD06 and LD19, opt-in: points within 5 m are
+ * grouped by angle and distance; a small, faint group is noise and its
+ * points get distance 0 and intensity 0. Sorts the scan by angle. Ported
+ * from LDROBOT's SDK (MIT; see LICENSE-LDROBOT).
+ */
+void lidar_filter_near(struct lidar_scan *scan);
+
+/*
  * The clock packets are stamped with, in microseconds. On ESP-IDF it is
  * esp_timer_get_time(). On the STM32 HAL the default is weak and only
  * HAL_GetTick() * 1000: millisecond steps that wrap after 49.7 days. Define

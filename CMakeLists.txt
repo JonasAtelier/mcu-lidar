@@ -14,7 +14,8 @@
 # REQUIRES driver, not esp_driver_i2c/uart/gpio: the split components do not
 # exist on IDF 5.2, and driver still pulls them in on later versions.
 # esp_timer is lidar_time_us()'s clock.
-set(srcs "src/lidar.c" "src/lidar_log.c" "src/lidar_port_esp.c")
+set(srcs "src/lidar.c" "src/lidar_log.c" "src/lidar_filter.c"
+         "src/lidar_port_esp.c")
 
 if(CONFIG_LIDAR AND NOT (CONFIG_LIDAR_LD19))
     message(WARNING "lidar: CONFIG_LIDAR is on but no chip driver is selected; "
