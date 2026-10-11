@@ -1,0 +1,31 @@
+# Read by ESP-IDF as a component Kconfig, and by both forges' `make menu`
+# (scripts/menu.py) for the LIDAR_<CHIP> prompts. stm-forge has no Kconfig
+# build step: its build only sees the defconfig lines, as
+# -DCONFIG_LIDAR_<CHIP>=1 or 0. Every chip is off unless set.
+menuconfig LIDAR
+    bool "2D scanning lidar subsystem"
+    default y
+    help
+        The lidar core: struct lidar_dev, lidar_read_packet() and
+        lidar_read_scan() with revolution assembly, lidar_filter_near()
+        and the lidar_* log helpers. Pick the chip drivers you need below;
+        none is built by default, so a chip missing from sdkconfig is off.
+
+if LIDAR
+
+    config LIDAR_LD19
+        bool "LDROBOT LD19 / LD06 (UART, 230400)"
+        default n
+        help
+            Build the LD19 driver, which reads the LD06 too: ld19_init()
+            and the ld19_* calls of esp-ld19-lidar, cfg.model for the
+            LD06, and ld19_lidar().
+
+    config LIDAR_DEBUG
+        bool "lidar_dbg() lines"
+        default n
+        help
+            STM32 HAL only: compile lidar_dbg() lines in. On ESP-IDF
+            lidar_dbg() is ESP_LOGD and the log level decides.
+
+endif # LIDAR
