@@ -21,7 +21,8 @@ component directory `lidar` as well.
 > **Hardware unverified.** Host tests use simulated scanners and platform
 > stubs. Nothing here has run on a physical lidar.
 
-[Supported hardware](#supported-hardware) · [Install](#install) ·
+[Supported hardware](#supported-hardware) · [Drivers](#drivers) ·
+[Install](#install) ·
 [Quick start](#quick-start) · [Examples](#examples) ·
 [Documentation](#documentation) · [Tests](#tests) · [License](#license)
 
@@ -29,11 +30,37 @@ component directory `lidar` as well.
 
 | Chip | Interface | Notes |
 |---|---|---|
-| **LD19** | UART TX only, 230400 8N1 | 4500 points/s at 10 Hz, its own speed control; **PWM pin grounded when unused** |
-| **LD06** | the same | parsed by the same code in LDROBOT's SDK; `cfg.model = LD19_MODEL_LD06` |
+| **LD19** | UART | LDROBOT 360° lidar |
+| **LD06** | UART | LDROBOT 360° lidar |
 
 One Kconfig option, `LIDAR_LD19`. Wiring is in the
 [wiring guide](docs/hardware.md).
+
+## Drivers
+
+<details><summary><b>LD19</b> — UART</summary>
+
+4500 points/s at 10 Hz, its own speed control; **PWM pin grounded when
+unused**.
+
+- Interface: UART TX only, 230400 8N1
+- Examples: ESP-IDF [ld19](examples/esp/ld19/) (esp-ld19-lidar's) · STM32 HAL
+  [ld19](examples/stm/ld19/main.c), DMA to `ld19_rx_feed()`
+- Chip reference: [LD06 and LD19](docs/chips.md#ld06-and-ld19)
+
+</details>
+
+<details><summary><b>LD06</b> — UART</summary>
+
+Parsed by the same code as the LD19 in LDROBOT's SDK; `cfg.model =
+LD19_MODEL_LD06`.
+
+- Interface: the same as the LD19: UART TX only, 230400 8N1
+- Examples: ESP-IDF [ld06](examples/esp/ld06/), the category view and the
+  filter · STM32 HAL none
+- Chip reference: [LD06 and LD19](docs/chips.md#ld06-and-ld19)
+
+</details>
 
 ## Install
 
@@ -99,10 +126,7 @@ if (lidar_read_scan(ld19_lidar(lidar), &scan, 300) == 0)
 
 ## Examples
 
-| Chip | ESP-IDF | STM32 HAL |
-|---|---|---|
-| LD19 | [ld19](examples/esp/ld19/) (esp-ld19-lidar's) | [ld19](examples/stm/ld19/main.c), DMA to `ld19_rx_feed()` |
-| LD06 | [ld06](examples/esp/ld06/), the category view and the filter | -- |
+Each driver's examples are listed under [Drivers](#drivers).
 
 ESP-IDF examples locate this library through `EXTRA_COMPONENT_DIRS`, which
 assumes the repository is checked out as `lidar`:
