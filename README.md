@@ -33,6 +33,13 @@ The monitor reports how many points arrived in a turn, the nearest return in mil
 
 ## Scanners and examples
 
+```mermaid
+flowchart LR
+    A["UART stream"] --> B["Find a 47-byte packet<br/>Check header and CRC"]
+    B --> C["Decode 12 returns<br/>Angle, distance, intensity"]
+    C --> D["Collect one turn<br/>Split at angular wraparound"]
+```
+
 The LD19 and LD06 share a UART packet format and a driver. Read a packet for individual returns or call `lidar_read_scan()` for a full turn. The LD06 example also enables the near filter. [Packet and scan API](include/lidar.h)
 
 | Chip | Driver header | ESP-IDF project | STM32 HAL example |
