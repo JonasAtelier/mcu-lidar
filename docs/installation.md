@@ -17,6 +17,9 @@ needs a forge; if you build with esp-forge or stm-forge, see
 [With forge](#with-forge). The steps use the LD19; the same option and
 driver read the LD06 (`cfg.model`). The reference follows the guides.
 
+**Arduino is not supported yet.** TODO: make the library usable from
+Arduino (Arduino IDE and PlatformIO).
+
 ## ESP-IDF, step by step
 
 **You need** ESP-IDF 5.2 or newer, with `idf.py` working in your terminal, and
