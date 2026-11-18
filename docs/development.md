@@ -31,7 +31,8 @@ examples/
   esp/<chip>/               ESP-IDF projects: ld19 (esp-ld19-lidar's), ld06
   stm/<chip>/               STM32 snippet: ld19, DMA to ld19_rx_feed()
 docs/                       the five guides; the manuals here are gitignored
-CMakeLists.txt              ESP-IDF only; stm-forge globs src/**/*.c instead
+CMakeLists.txt              ESP-IDF component; elsewhere a static library for add_subdirectory(); stm-forge globs src/**/*.c instead
+                            the static library's options are Kconfig's bool entries, found by the type line directly under each `config`
 Kconfig                     LIDAR and LIDAR_<CHIP>, for ESP-IDF and both forges' menus
 idf_component.yml           ESP-IDF component manifest
 LICENSE, LICENSE-LDROBOT    MIT; LDROBOT's MIT notice for the ported filter
@@ -112,7 +113,8 @@ caller's deadline.
    and only then set `lidar.ops` and `lidar.priv`. Wait with deadlines on
    `lidar_elapsed_ms()`. Work in errno; return `LIDAR_HANDLE_RET(err)`.
 4. Add `CONFIG_LIDAR_FOO` to:
-   - the no-chip checks in `CMakeLists.txt` and `src/lidar_port_stm.c`;
+   - the no-chip checks in `CMakeLists.txt` (its ESP-IDF part; the
+     `add_subdirectory()` part reads `Kconfig`) and `src/lidar_port_stm.c`;
    - a HAL module `#error` in `src/lidar_priv.h`;
    - its sources in `CMakeLists.txt`;
    - `Kconfig`;
