@@ -59,8 +59,8 @@ To run the simulated tests on your computer, run `make -C test test` from the li
 
 ## License
 
-[MIT](LICENSE). `src/lidar_filter.c` ports LDROBOT's near filter from its
-SDK (ldlidar_stl_ros), which is MIT too, © 2020 SHENZHEN LDROBOT: its notice
+© 2026 JonasAtelier, [GPL-3.0-only](LICENSE). `src/lidar_filter.c` ports LDROBOT's near filter from its
+SDK (ldlidar_stl_ros), which is MIT, © 2020 SHENZHEN LDROBOT: its notice
 is kept in [LICENSE-LDROBOT](LICENSE-LDROBOT).
 
 [Browse the workshop catalog · ESP32 and STM32 drivers](https://github.com/JonasAtelier/jonas-atelier-libraries#esp32-and-stm32-drivers)
