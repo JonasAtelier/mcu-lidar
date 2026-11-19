@@ -35,7 +35,7 @@ CMakeLists.txt              ESP-IDF component; elsewhere a static library for ad
                             the static library's options are Kconfig's bool entries, found by the type line directly under each `config`
 Kconfig                     LIDAR and LIDAR_<CHIP>, for ESP-IDF and both forges' menus
 idf_component.yml           ESP-IDF component manifest
-LICENSE, LICENSE-LDROBOT    MIT; LDROBOT's MIT notice for the ported filter
+LICENSE, LICENSE-LDROBOT    GPL-3.0-only; LDROBOT's MIT notice for the ported filter
 ```
 
 Naming inside `src/<chip>/`, the same in every category library:
